@@ -1,0 +1,675 @@
+<html>
+<head>
+
+<title>ES6 Features</title>
+<!-- inject:css -->
+<link rel="stylesheet" href="style.css">
+<!-- endinject -->
+</head>
+<body>
+
+<!-- inject:md -->
+<h1 id="es6-features">ES6 Features</h1>
+<ul class="content-index" ></ul>
+
+
+<h2 id="arrow-functions">Arrow Functions</h2>
+<p>A short hand notation for <code>function()</code>, but it does not bind <code>this</code>.</p>
+<pre><code class="lang-javascript">no-eval
+var odds = evens.map(v =&gt; v + 1);  // no parentes and no brackets
+var nums = evens.map((v, i) =&gt; v + i);
+var pairs = evens.map(v =&gt; ({even: v, odd: v + 1}));
+
+// Statement bodies
+nums.forEach(v =&gt; {
+  if (v % 5 === 0)
+    fives.push(v);
+});
+</code></pre>
+<p>How does <code>this</code> work?</p>
+<pre><code class="lang-javascript">  var object = {
+      name: &quot;Name&quot;, 
+      arrowGetName: () =&gt; this.name,
+      regularGetName: function() { return this.name },
+      arrowGetThis: () =&gt; this,
+      regularGetThis: function() { return this }
+  }
+
+  console.log(this.name)
+  console.log(object.arrowGetName());
+  console.log(object.arrowGetThis());
+  console.log(this)
+  console.log(object.regularGetName());
+  console.log(object.regularGetThis());
+</code></pre>
+
+<h2 id="classes">Classes</h2>
+<p>As we know them from &quot;real&quot; languages. Syntactic sugar on top of prototype-inheritence. </p>
+<pre><code class="lang-javascript">no-eval
+class SkinnedMesh extends THREE.Mesh {
+  constructor(geometry, materials) {
+    super(geometry, materials);
+
+    this.idMatrix = SkinnedMesh.defaultMatrix();
+    this.bones = [];
+    this.boneMatrices = [];
+    //...
+  }
+  update(camera) {
+    //...
+    super.update();
+  }
+  get boneCount() {
+    return this.bones.length;
+  }
+  set matrixType(matrixType) {
+    this.idMatrix = SkinnedMesh[matrixType]();
+  }
+  static defaultMatrix() {
+    return new THREE.Matrix4();
+  }
+}
+</code></pre>
+<p><a href="https://lebab.io/#">Lebab.io</a></p>
+<h2 id="enhanced-object-literals">Enhanced Object Literals</h2>
+<pre><code class="lang-javascript">var theProtoObj = {
+  toString: function() {
+    return &quot;The ProtoOBject To string&quot;
+  }
+}
+
+var handler = () =&gt; &quot;handler&quot;
+
+
+var obj = {
+    // __proto__
+    __proto__: theProtoObj,
+
+    // Shorthand for ‘handler: handler’
+    handler,
+
+    // Methods
+    toString() {
+
+     // Super calls
+     return &quot;d &quot; + super.toString();
+    },
+
+    // Computed (dynamic) property names
+    [ &quot;prop_&quot; + (() =&gt; 42)() ]: 42
+};
+
+console.log(obj.handler)
+console.log(obj.handler())
+console.log(obj.toString())
+console.log(obj.prop_42)
+</code></pre>
+<h2 id="string-interpolation">String interpolation</h2>
+<p>Nice syntax for string interpolation (but sligthly worse performance, <a href="http://stackoverflow.com/questions/29055518/are-es6-template-literals-faster-than-string-concatenation">Source</a>)</p>
+<pre><code class="lang-javascript">var name = &quot;Bob&quot;, time = &quot;today&quot;;
+
+var multiLine = `This
+
+Line
+
+Spans Multiple
+
+Lines`
+
+
+console.log(`Hello ${name},how are you ${time}?`)
+console.log(multiLine)
+</code></pre>
+<h2 id="destruction">Destruction</h2>
+<pre><code class="lang-javascript">// list matching
+var [a, , b] = [1,2,3];
+console.log(a)
+console.log(b)
+</code></pre>
+<p> Objects can be destructed as well. (Matching)</p>
+<pre><code class="lang-javascript">nodes = () =&gt; { return {op: &quot;a&quot;, lhs: &quot;b&quot;, rhs: &quot;c&quot;}}
+var { op: a, lhs: b , rhs: c } = nodes()
+console.log(a)
+console.log(b)
+console.log(c)
+</code></pre>
+<p> Using Shorthand notation</p>
+<pre><code class="lang-javascript">nodes = () =&gt; { return {lhs: &quot;a&quot;, op: &quot;b&quot;, rhs: &quot;c&quot;}}
+
+// binds `op`, `lhs` and `rhs` in scope
+var {op, lhs, rhs} = nodes()
+
+console.log(op)
+console.log(lhs)
+console.log(rhs)
+</code></pre>
+<p>Can be used in parameter position</p>
+<pre><code class="lang-javascript">
+function g({name: x}) {
+  return x
+}
+
+function m({name}) {
+  return name
+}
+
+console.log(g({name: 5}))
+console.log(m({name: 5}))
+</code></pre>
+<p>Fail-soft destructuring</p>
+<pre><code class="lang-javascript">var [a] = []
+var [b = 1] = []
+var c = [];
+console.log(a)
+console.log(b);
+console.log(c);
+</code></pre>
+<h2 id="defualt">Defualt</h2>
+<pre><code class="lang-javascript">function f(x, y=12) {
+  return x + y;
+}
+
+console.log(f(3))
+</code></pre>
+<h2 id="spread">Spread</h2>
+<p>In functions</p>
+<pre><code class="lang-javascript">function f(x, y, z) {
+  return x + y + z;
+}
+// Pass each elem of array as argument
+console.log(f(...[1,2,3]))
+</code></pre>
+<p>In arrays</p>
+<pre><code class="lang-javascript">var parts = [&quot;shoulders&quot;, &quot;knees&quot;];
+var lyrics = [&quot;head&quot;, ...parts, &quot;and&quot;, &quot;toes&quot;]; 
+
+console.log(lyrics)
+</code></pre>
+<h2 id="spread-object-literals">Spread + Object Literals</h2>
+<p>We can do cool stuff with this in object creations.</p>
+<pre><code class="lang-javascript">no-eval
+let { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 };
+console.log(x); // 1
+console.log(y); // 2
+console.log(z); // { a: 3, b: 4 }
+
+// Spread properties
+let n = { x, y, ...z };
+console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
+console.log(obj)
+</code></pre>
+<p>Sadly it is not support yet</p>
+<p><code>npm install --save-dev babel-plugin-transform-object-rest-spread</code></p>
+<h2 id="rest">Rest</h2>
+<pre><code class="lang-javascript">function demo(part1, ...part2) {
+    return ({part1, part2})
+}
+
+console.log(demo(1,2,3,4,5,6))
+</code></pre>
+<h2 id="let">Let</h2>
+<p><code>Let</code> is the new <code>var</code>. As it has &quot;sane&quot; bindings.</p>
+<pre><code class="lang-javascript">{
+   var globalVar = &quot;from demo1&quot;
+}
+
+{
+   let globalLet = &quot;from demo2&quot;;
+}
+
+console.log(globalVar)
+console.log(globalLet)
+</code></pre>
+<p>However, it does not assigne anything to <code>window</code></p>
+<pre><code class="lang-javascript">let me = &quot;go&quot;;  // globally scoped
+var i = &quot;able&quot;; // globally scoped
+
+console.log(window.me); 
+console.log(window.i);
+</code></pre>
+<p>It is not possible to redeclare a variable using <code>let</code></p>
+<pre><code class="lang-javascript">
+let me = &quot;foo&quot;;
+let me = &quot;bar&quot;; 
+console.log(me);
+</code></pre>
+<pre><code class="lang-javascript">
+var me = &quot;foo&quot;;
+var me = &quot;bar&quot;; 
+console.log(me)
+</code></pre>
+<h2 id="const">Const</h2>
+<p><code>Const</code> is for read only variables</p>
+<pre><code class="lang-javascript">const a = &quot;b&quot;
+a = &quot;a&quot;
+</code></pre>
+<h2 id="for-of">For..of</h2>
+<p>New type of iterators with an alternative to the <code>for..in</code>. It returns the value instead of the <code>keys</code>.</p>
+<pre><code class="lang-javascript">let list = [4, 5, 6];
+
+console.log(list)
+
+for (let i in list) {
+   console.log(i);
+}
+</code></pre>
+<pre><code class="lang-javascript">let list = [4, 5, 6];
+
+console.log(list)
+
+
+for (let i of list) {
+   console.log(i); 
+}
+</code></pre>
+<h3 id="iterators">Iterators</h3>
+<p>The iterator is a more dynamic type than arrays. </p>
+<pre><code class="lang-javascript">let infinite = {
+  [Symbol.iterator]() {
+    let c = 0;
+    return {
+      next() {
+        c++;
+        return { done: false, value: c }
+      }
+    }
+  }
+}
+
+console.log(&quot;start&quot;);
+
+for (var n of infinite) {
+  // truncate the sequence at 1000
+  if (n &gt; 10)
+    break;
+  console.log(n);
+}
+</code></pre>
+<p>Using Typescript interfaces we can see how it looks</p>
+<pre><code class="lang-javascript">no-eval
+interface IteratorResult {
+  done: boolean;
+  value: any;
+}
+interface Iterator {
+  next(): IteratorResult;
+}
+interface Iterable {
+  [Symbol.iterator](): Iterator
+}
+</code></pre>
+<h3 id="generators">Generators</h3>
+<p>Generators create iterators, and are more dynamic than iterators. They do not have to keep track of state in the same manner and does not support the concept of done. </p>
+<pre><code class="lang-javascript">var infinity = {
+  [Symbol.iterator]: function*() {
+    var c = 1;
+    for (;;) {   
+      yield c++;
+    }
+  }
+}
+
+console.log(&quot;start&quot;)
+for (var n of infinity) {
+  // truncate the sequence at 1000
+  if (n &gt; 10)
+    break;
+  console.log(n);
+}
+</code></pre>
+<p>Using typescript again to show the interfaces. </p>
+<pre><code class="lang-javascript">no-eval
+interface Generator extends Iterator {
+    next(value?: any): IteratorResult;
+    throw(exception: any);
+}
+</code></pre>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*">function*</a>
+<a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Iterators_and_Generators">Iterators and generator</a></p>
+<p>An example of yield* </p>
+<pre><code class="lang-javascript">function* anotherGenerator(i) {
+  yield i + 1;
+  yield i + 2;
+  yield i + 3;
+}
+
+function* generator(i) {
+  yield i;
+  yield* anotherGenerator(i);
+  yield i + 10;
+}
+
+var gen = generator(10);
+
+console.log(gen.next().value); 
+console.log(gen.next().value); 
+console.log(gen.next().value); 
+console.log(gen.next().value); 
+console.log(gen.next().value);
+</code></pre>
+<h2 id="unicode">Unicode</h2>
+<p>ES6 provides better support for Unicode. </p>
+<pre><code class="lang-javascript">var regex = new RegExp(&#39;\u{61}&#39;, &#39;u&#39;);
+
+console.log(regex.unicode)
+console.log(&quot;\uD842\uDFD7&quot;)
+console.log(&quot;\uD842\uDFD7&quot;.codePointAt())
+</code></pre>
+<h2 id="modules-module-loaders">Modules &amp; Module Loaders</h2>
+<p>Native support for modules.</p>
+<pre><code class="lang-javascript">no-eval
+import defaultMember from &quot;module-name&quot;;
+import * as name from &quot;module-name&quot;;
+import { member } from &quot;module-name&quot;;
+import { member as alias } from &quot;module-name&quot;;
+import { member1 , member2 } from &quot;module-name&quot;;
+import { member1 , member2 as alias2 , [...] } from &quot;module-name&quot;;
+import defaultMember, { member [ , [...] ] } from &quot;module-name&quot;;
+import defaultMember, * as name from &quot;module-name&quot;;
+import &quot;module-name&quot;;
+</code></pre>
+<pre><code class="lang-javascript">no-eval
+export { name1, name2, …, nameN };
+export { variable1 as name1, variable2 as name2, …, nameN };
+export let name1, name2, …, nameN; // also var
+export let name1 = …, name2 = …, …, nameN; // also var, const
+
+export expression;
+export default expression;
+export default function (…) { … } // also class, function*
+export default function name1(…) { … } // also class, function*
+export { name1 as default, … };
+
+export * from …;
+export { name1, name2, …, nameN } from …;
+export { import1 as name1, import2 as name2, …, nameN } from …;
+</code></pre>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">Import</a></p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export">Export</a></p>
+<h2 id="set">Set</h2>
+<p>Sets as in the mathematical counterpart where all items are unique. </p>
+<pre><code class="lang-javascript">var set = new Set();
+set.add(&quot;Potato&quot;).add(&quot;Tomato&quot;).add(&quot;Tomato&quot;);
+console.log(set.size)
+console.log(set.has(&quot;Tomato&quot;))
+
+for(item of set) {
+   console.log(item)
+}
+</code></pre>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">Set</a></p>
+<h2 id="weakset">WeakSet</h2>
+<p>The <code>WeakSet</code> object lets you store weakly held objects in a collection. Objects without an reference will be garbage collected. </p>
+<pre><code class="lang-javascript">var item = { a:&quot;Potato&quot;}
+var set = new WeakSet();
+set.add({ a:&quot;Potato&quot;}).add(item).add({ a:&quot;Tomato&quot;}).add({ a:&quot;Tomato&quot;});
+console.log(set.size)
+console.log(set.has({a:&quot;Tomato&quot;}))
+console.log(set.has(item))
+
+for(item of set) {
+   console.log(item)
+}
+</code></pre>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet">WeakSet</a></p>
+<h2 id="map">Map</h2>
+<p>Maps, also known as dictonary. </p>
+<pre><code class="lang-javascript">var map = new Map();
+map.set(&quot;Potato&quot;, 12);
+map.set(&quot;Tomato&quot;, 34);
+
+console.log(map.get(&quot;Potato&quot;))
+
+
+for(item of map) {
+   console.log(item)
+}
+
+
+for(item in map) {
+   console.log(item)
+}
+</code></pre>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a></p>
+<h2 id="weakmap">WeakMap</h2>
+<p>Uses objects for keys, and only keeps weak reference to the keys.</p>
+<pre><code class="lang-javascript">var wm = new WeakMap();
+
+var o1  = {}
+var o2  = {}
+var o3  = {}
+
+
+wm.set(o1, 1);
+wm.set(o2, 2);
+wm.set(o3, {a: &quot;a&quot;});
+wm.set({}, 4);
+
+console.log(wm.get(o2));
+console.log(wm.has({}))
+
+delete o2;
+
+console.log(wm.get(o3));
+
+for(item in wm) {
+   console.log(item)
+}
+
+
+for(item of wm) {
+   console.log(item)
+}
+</code></pre>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap">WeakMap</a></p>
+<h2 id="proxies">Proxies</h2>
+<p>Proxies can be used to alter objects behavoir. It allows us to define traps.</p>
+<pre><code class="lang-javascript">
+var obj = function ProfanityGenerator() {
+    return {
+       words: &quot;Horrible words&quot;    
+    }
+}()
+
+var handler = function CensoringHandler() {
+        return {
+        get: function (target, key) {
+            return target[key].replace(&quot;Horrible&quot;, &quot;Nice&quot;);
+        },
+    }
+
+}()
+
+var proxy = new Proxy(obj, handler);
+
+console.log(proxy.words);
+</code></pre>
+<p>The following traps are available</p>
+<pre><code class="lang-javascript">no-eval
+var handler =
+{
+  get:...,
+  set:...,
+  has:...,
+  deleteProperty:...,
+  apply:...,
+  construct:...,
+  getOwnPropertyDescriptor:...,
+  defineProperty:...,
+  getPrototypeOf:...,
+  setPrototypeOf:...,
+  enumerate:...,
+  ownKeys:...,
+  preventExtensions:...,
+  isExtensible:...
+}
+
+
+
+[Proxies](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
+
+
+## Symbols
+Symbols are a new type. Can be used to create anomymous properties.
+
+```javascript 
+var typeSymbol = Symbol(&quot;type&quot;);
+
+class Pet {
+
+  constructor(type) {
+
+    this[typeSymbol] = type;
+
+  }
+  getType() {
+     return this[typeSymbol];
+  }
+
+}
+
+
+var a = new Pet(&quot;dog&quot;);
+console.log(a.getType());
+console.log(Object.getOwnPropertyNames(a))
+
+
+console.log(Symbol(&quot;a&quot;) === Symbol(&quot;a&quot;))
+</code></pre>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol">More info</a></p>
+<h2 id="inheritable-built-ins">Inheritable Built-ins</h2>
+<p>We can now inherit from native classes. </p>
+<pre><code class="lang-javascript">
+class CustomArray extends Array {
+
+}
+
+var a = new CustomArray();
+
+a[0] = 2
+console.log(a[0])
+</code></pre>
+<p>It is not possible to override the getter function without using Proxies of arrays.</p>
+<h2 id="new-library">New Library</h2>
+<p>Various new methods and constants.</p>
+<pre><code class="lang-javascript">console.log(Number.EPSILON)
+console.log(Number.isInteger(Infinity))
+console.log(Number.isNaN(&quot;NaN&quot;))
+
+console.log(Math.acosh(3))
+console.log(Math.hypot(3, 4))
+console.log(Math.imul(Math.pow(2, 32) - 1, Math.pow(2, 32) - 2))
+
+console.log(&quot;abcde&quot;.includes(&quot;cd&quot;) )
+console.log(&quot;abc&quot;.repeat(3) )
+
+
+console.log(Array.of(1, 2, 3) )
+console.log([0, 0, 0].fill(7, 1) )
+console.log([1, 2, 3].find(x =&gt; x == 3) )
+console.log([1, 2, 3].findIndex(x =&gt; x == 2)) 
+console.log([1, 2, 3, 4, 5].copyWithin(3, 0)) 
+console.log([&quot;a&quot;, &quot;b&quot;, &quot;c&quot;].entries() )
+console.log([&quot;a&quot;, &quot;b&quot;, &quot;c&quot;].keys() )
+console.log([&quot;a&quot;, &quot;b&quot;, &quot;c&quot;].values() )
+
+console.log(Object.assign({}, { origin: new Point(0,0) }))
+</code></pre>
+<p>Documentation: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math">Math</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from">Array.from</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of">Array.of</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin">Array.prototype.copyWithin</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">Object.assign</a></p>
+<h2 id="binary-and-octal">Binary and Octal</h2>
+<p>Literals for binary and octal numbering.</p>
+<pre><code class="lang-javascript">console.log(0b11111)
+console.log(0o2342)
+
+console.log(0xff); // also in es5
+</code></pre>
+<h2 id="promises">Promises</h2>
+<p>The bread and butter for async programing. </p>
+<pre><code class="lang-javascript">var p1 = new Promise((resolve, reject) =&gt; {
+  setTimeout(() =&gt; resolve(&quot;1&quot;), 101)
+})
+var p2 = new Promise((resolve, reject) =&gt; {
+  setTimeout(() =&gt; resolve(&quot;2&quot;), 100)
+})
+
+Promise.race([p1, p2]).then((res) =&gt; {
+   console.log(res)
+})
+
+Promise.all([p1, p2]).then((res) =&gt; {
+   console.log(res)
+})
+</code></pre>
+<h3 id="quick-promise">Quick Promise</h3>
+<p>Need a quick always resolved promise?</p>
+<pre><code class="lang-javascript">
+var p1 = Promise.resolve(&quot;1&quot;)
+var p2 = Promise.reject(&quot;2&quot;)
+
+Promise.race([p1, p2]).then((res) =&gt; {
+   console.log(res)
+})
+</code></pre>
+<h3 id="fail-fast">Fail fast</h3>
+<p>If a promise fails <code>all</code> and <code>race</code> will reject as well. </p>
+<pre><code class="lang-javascript">var p1 = new Promise((resolve, reject) =&gt; {
+  setTimeout(() =&gt; resolve(&quot;1&quot;), 1001)
+})
+var p2 = new Promise((resolve, reject) =&gt; {
+  setTimeout(() =&gt; reject(&quot;2&quot;), 1)
+})
+
+Promise.race([p1, p2]).then((res) =&gt; {
+   console.log(&quot;success&quot; + res)
+}, res =&gt; {
+   console.log(&quot;error &quot; + res)
+})
+
+Promise.all([p1, p2]).then((res) =&gt; {
+   console.log(&quot;success&quot; + res)
+}, res =&gt; {
+   console.log(&quot;error &quot; + res)
+})
+</code></pre>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">More Info</a></p>
+<h2 id="reflect">Reflect</h2>
+<p>New type of meta programming with new API for existing and also few new methods. </p>
+<pre><code class="lang-javascript">
+var z = {w: &quot;Super Hello&quot;}
+var y = {x: &quot;hello&quot;, __proto__: z};
+
+console.log(Reflect.getOwnPropertyDescriptor(y, &quot;x&quot;));
+console.log(Reflect.has(y, &quot;w&quot;));
+console.log(Reflect.ownKeys(y, &quot;w&quot;));
+
+console.log(Reflect.has(y, &quot;x&quot;));
+console.log(Reflect.deleteProperty(y,&quot;x&quot;))
+console.log(Reflect.has(y, &quot;x&quot;));
+</code></pre>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect">More Info</a></p>
+<h2 id="tail-call-optimization">Tail Call Optimization</h2>
+<p>ES6 should fix ensure tail calls does not generate stack overflow. (Not all implementations work).</p>
+<pre><code class="lang-javascript">function factorial(n, acc = 1) {
+
+    if (n &lt;= 1) return acc;
+    return factorial(n - 1, n * acc);
+}
+console.log(factorial(10))
+console.log(factorial(100))
+console.log(factorial(1000))
+console.log(factorial(10000))
+console.log(factorial(100000))
+console.log(factorial(1000000))
+</code></pre>
+
+<!-- endinject -->
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+  integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
+  crossorigin="anonymous"></script>
+<script src="./script.js"></script>
+</body>
+</html>
