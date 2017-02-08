@@ -1,0 +1,31 @@
+{
+  "name": "es6-features",
+  "version": "1.0.0",
+  "description": " Guide to ES6-features with evaluatable code blocks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cp src/index.html dist/index.html; replace github-markdown src/content.md;  "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codetower/es6-features.git"
+  },
+  "author": "Rasmus Prentow",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codetower/es6-features/issues"
+  },
+  "homepage": "https://github.com/codetower/es6-features#readme",
+
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-inject": "^4.2.0",
+    "gulp-print": "^2.0.1",
+    "markdown-to-html": "0.0.13",
+    "gulp-clean": "^0.3.2",
+    "gulp-copy": "^1.0.0",
+    "gulp-markdown": "^1.2.0",
+    "gulp-watch": "^4.3.11"
+  }
+}
