@@ -21,7 +21,7 @@ var convert = i => code => {
     .replace(/console.log\((.*)\).*/g, `
 try { 
   var _______a = $1;
-  if(typeof(_______a) === 'object' ) {
+  if(typeof(_______a) === 'object' && _______a != window) {
     _______a = JSON.stringify(_______a)
   }
   addResult('${i}', '$1 -> ' + _______a); }
