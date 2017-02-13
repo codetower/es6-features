@@ -120,20 +120,20 @@ Lines`
 console.log(`Hello ${name},how are you ${time}?`)
 console.log(multiLine)
 </code></pre>
-<h2 id="destruction">Destruction</h2>
-<pre><code class="lang-javascript">// list matching
+<h2 id="destructuring">Destructuring</h2>
+<pre><code class="lang-javascript">// list &quot;matching&quot;
 var [a, , b] = [1,2,3];
 console.log(a)
 console.log(b)
 </code></pre>
-<p> Objects can be destructed as well. (Matching)</p>
+<p> Objects can be destructured as well. </p>
 <pre><code class="lang-javascript">nodes = () =&gt; { return {op: &quot;a&quot;, lhs: &quot;b&quot;, rhs: &quot;c&quot;}}
 var { op: a, lhs: b , rhs: c } = nodes()
 console.log(a)
 console.log(b)
 console.log(c)
 </code></pre>
-<p> Using Shorthand notation</p>
+<p> Using Shorthand notation.</p>
 <pre><code class="lang-javascript">nodes = () =&gt; { return {lhs: &quot;a&quot;, op: &quot;b&quot;, rhs: &quot;c&quot;}}
 
 // binds `op`, `lhs` and `rhs` in scope
@@ -164,7 +164,7 @@ console.log(a)
 console.log(b);
 console.log(c);
 </code></pre>
-<h2 id="defualt">Defualt</h2>
+<h2 id="default">Default</h2>
 <pre><code class="lang-javascript">function f(x, y=12) {
   return x + y;
 }
@@ -503,17 +503,11 @@ var handler =
   preventExtensions:...,
   isExtensible:...
 }
-
-
-
-[Proxies](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
-
-
-## Symbols
-Symbols are a new type. Can be used to create anomymous properties.
-
-```javascript 
-var typeSymbol = Symbol(&quot;type&quot;);
+</code></pre>
+<p><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Proxy">Proxies</a></p>
+<h2 id="symbols">Symbols</h2>
+<p>Symbols are a new type. Can be used to create anomymous properties.</p>
+<pre><code class="lang-javascript">var typeSymbol = Symbol(&quot;type&quot;);
 
 class Pet {
 
