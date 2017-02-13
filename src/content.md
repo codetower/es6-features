@@ -97,14 +97,14 @@ console.log(multiLine)
 ## Destructuring
 
 ```javascript
-// list matching
+// list "matching"
 var [a, , b] = [1,2,3];
 console.log(a)
 console.log(b)
 ```
  
  
- Objects can be destructured as well. (Matching)
+ Objects can be destructured as well. 
  
 ```javascript
 nodes = () => { return {op: "a", lhs: "b", rhs: "c"}}
@@ -113,7 +113,7 @@ console.log(a)
 console.log(b)
 console.log(c)
 ```
- Using Shorthand notation
+ Using Shorthand notation.
  
  ```javascript
 nodes = () => { return {lhs: "a", op: "b", rhs: "c"}}
@@ -592,7 +592,7 @@ var handler =
   preventExtensions:...,
   isExtensible:...
 }
-
+```
 
 
 [Proxies](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
