@@ -94,7 +94,7 @@ console.log(multiLine)
 
 
 
-## Destruction
+## Destructuring
 
 ```javascript
 // list matching
@@ -104,7 +104,7 @@ console.log(b)
 ```
  
  
- Objects can be destructed as well. (Matching)
+ Objects can be destructured as well. (Matching)
  
 ```javascript
 nodes = () => { return {op: "a", lhs: "b", rhs: "c"}}
@@ -154,7 +154,7 @@ console.log(c);
 ```
 
 
-## Defualt
+## Default
 ```javascript
 function f(x, y=12) {
   return x + y;
