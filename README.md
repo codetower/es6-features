@@ -8,3 +8,7 @@ shims, polyfill, babel etc. Hence the following disclaimer.
 
 ## Disclaimer
 The project uses no polyfills, shims etc. and will therefore only work in browsers supporting ES6.  
+
+
+## Contributions
+Contributions are most welcome :)
