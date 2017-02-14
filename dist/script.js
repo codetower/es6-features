@@ -16,7 +16,7 @@ function clearResult(id) {
 
 var convert = i => code => {
   return code
-    .replace(/<(?:.|\n)*?>/gm, '')
+    .replace(/<(?:\w|\/)(?:.|\n)*?>/gm, '')
     .replace(/console/, `clearResult("${i}"); \nconsole`)
     .replace(/console.log\((.*)\).*/g, `
 try { 
@@ -46,6 +46,7 @@ function executeCode(i){
   try {
     eval(code);
   } catch(e) {
+      console.log(e);
     addResult(i, e)
   }
 }
