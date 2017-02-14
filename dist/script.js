@@ -46,7 +46,6 @@ function executeCode(i){
   try {
     eval(code);
   } catch(e) {
-      console.log(e);
     addResult(i, e)
   }
 }
