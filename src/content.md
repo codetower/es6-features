@@ -456,7 +456,7 @@ set.add("Potato").add("Tomato").add("Tomato");
 console.log(set.size)
 console.log(set.has("Tomato"))
 
-for(item of set) {
+for(var item of set) {
    console.log(item)
 }
 ```
@@ -475,7 +475,7 @@ console.log(set.size)
 console.log(set.has({a:"Tomato"}))
 console.log(set.has(item))
 
-for(item of set) {
+for(let item of set) {
    console.log(item)
 }
 ```
@@ -496,12 +496,12 @@ map.set("Tomato", 34);
 console.log(map.get("Potato"))
 
 
-for(item of map) {
+for(let item of map) {
    console.log(item)
 }
 
 
-for(item in map) {
+for(let item in map) {
    console.log(item)
 }
 ```
@@ -533,12 +533,12 @@ delete o2;
 
 console.log(wm.get(o3));
 
-for(item in wm) {
+for(let item in wm) {
    console.log(item)
 }
 
 
-for(item of wm) {
+for(let item of wm) {
    console.log(item)
 }
 ```
@@ -779,12 +779,10 @@ console.log(Reflect.has(y, "x"));
 ES6 should fix ensure tail calls does not generate stack overflow. (Not all implementations work).
 
 
-<!-- Sorry for yoda it's a temp workaround due to the framework not working properly (it was a slash together) -->
-
 ```javascript
 
 function factorial(n, acc = 1) {
-    if (1 >= n) return acc; 
+    if (n <= 1) return acc; 
     return factorial(n - 1, n * acc);
 }
 console.log(factorial(10))
