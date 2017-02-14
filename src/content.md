@@ -778,10 +778,13 @@ console.log(Reflect.has(y, "x"));
 ## Tail Call Optimization 
 ES6 should fix ensure tail calls does not generate stack overflow. (Not all implementations work).
 
+
+<!-- Sorry for yoda it's a temp workaround due to the framework not working properly (it was a slash together) -->
+
 ```javascript
+
 function factorial(n, acc = 1) {
-   
-    if (n <= 1) return acc;
+    if (1 >= n) return acc; 
     return factorial(n - 1, n * acc);
 }
 console.log(factorial(10))
@@ -790,4 +793,6 @@ console.log(factorial(1000))
 console.log(factorial(10000))
 console.log(factorial(100000))
 console.log(factorial(1000000))
+
 ```
+
