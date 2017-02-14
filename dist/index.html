@@ -105,7 +105,7 @@ console.log(obj.toString())
 console.log(obj.prop_42)
 </code></pre>
 <h2 id="string-interpolation">String interpolation</h2>
-<p>Nice syntax for string interpolation (but sligthly worse performance, <a href="http://stackoverflow.com/questions/29055518/are-es6-template-literals-faster-than-string-concatenation">Source</a>)</p>
+<p>Nice syntax for string interpolation </p>
 <pre><code class="lang-javascript">var name = &quot;Bob&quot;, time = &quot;today&quot;;
 
 var multiLine = `This
@@ -201,8 +201,9 @@ console.log(obj)
 <p>Sadly it is not support yet</p>
 <p><code>npm install --save-dev babel-plugin-transform-object-rest-spread</code></p>
 <h2 id="rest">Rest</h2>
+<p>We can allow unlimited params to function by using the rest operator. </p>
 <pre><code class="lang-javascript">function demo(part1, ...part2) {
-    return ({part1, part2})
+    return {part1, part2}
 }
 
 console.log(demo(1,2,3,4,5,6))
@@ -220,7 +221,7 @@ console.log(demo(1,2,3,4,5,6))
 console.log(globalVar)
 console.log(globalLet)
 </code></pre>
-<p>However, it does not assigne anything to <code>window</code></p>
+<p>However, it does not assign anything to <code>window</code></p>
 <pre><code class="lang-javascript">let me = &quot;go&quot;;  // globally scoped
 var i = &quot;able&quot;; // globally scoped
 
@@ -242,6 +243,11 @@ console.log(me)
 <p><code>Const</code> is for read only variables</p>
 <pre><code class="lang-javascript">const a = &quot;b&quot;
 a = &quot;a&quot;
+</code></pre>
+<p>It should be noted that <code>const</code> objects can still be mutated.</p>
+<pre><code class="lang-javascript">const a = { a: &quot;a&quot; }
+a.a = &quot;b&quot;
+console.log(a)
 </code></pre>
 <h2 id="for-of">For..of</h2>
 <p>New type of iterators with an alternative to the <code>for..in</code>. It returns the value instead of the <code>keys</code>.</p>
@@ -384,10 +390,11 @@ export * from …;
 export { name1, name2, …, nameN } from …;
 export { import1 as name1, import2 as name2, …, nameN } from …;
 </code></pre>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">Import</a></p>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export">Export</a></p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">Import</a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export">Export</a></p>
 <h2 id="set">Set</h2>
-<p>Sets as in the mathematical counterpart where all items are unique. </p>
+<p>Sets as in the mathematical counterpart where all items are unique. 
+For people who know <code>SQL</code> this is equivalent to <code>distinct</code>. </p>
 <pre><code class="lang-javascript">var set = new Set();
 set.add(&quot;Potato&quot;).add(&quot;Tomato&quot;).add(&quot;Tomato&quot;);
 console.log(set.size)
@@ -399,7 +406,8 @@ for(var item of set) {
 </code></pre>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">Set</a></p>
 <h2 id="weakset">WeakSet</h2>
-<p>The <code>WeakSet</code> object lets you store weakly held objects in a collection. Objects without an reference will be garbage collected. </p>
+<p>The <code>WeakSet</code> object lets you store weakly held objects in a collection. 
+Objects without an reference will be garbage collected. </p>
 <pre><code class="lang-javascript">var item = { a:&quot;Potato&quot;}
 var set = new WeakSet();
 set.add({ a:&quot;Potato&quot;}).add(item).add({ a:&quot;Tomato&quot;}).add({ a:&quot;Tomato&quot;});
@@ -413,7 +421,7 @@ for(let item of set) {
 </code></pre>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet">WeakSet</a></p>
 <h2 id="map">Map</h2>
-<p>Maps, also known as dictonary. </p>
+<p>Maps, also known as dictonaries. </p>
 <pre><code class="lang-javascript">var map = new Map();
 map.set(&quot;Potato&quot;, 12);
 map.set(&quot;Tomato&quot;, 34);
@@ -429,6 +437,15 @@ for(let item of map) {
 for(let item in map) {
    console.log(item)
 }
+</code></pre>
+<p>Other types than strings can be used. </p>
+<pre><code class="lang-javascript">var map = new Map();
+var key = {a: &quot;a&quot;}
+map.set(key, 12);
+
+
+console.log(map.get(key))
+console.log(map.get({a: &quot;a&quot;}))
 </code></pre>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a></p>
 <h2 id="weakmap">WeakMap</h2>

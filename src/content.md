@@ -74,7 +74,7 @@ console.log(obj.prop_42)
 
 ## String interpolation
 
-Nice syntax for string interpolation (but sligthly worse performance, [Source](http://stackoverflow.com/questions/29055518/are-es6-template-literals-faster-than-string-concatenation))
+Nice syntax for string interpolation 
 
 ```javascript
 var name = "Bob", time = "today";
@@ -207,10 +207,10 @@ Sadly it is not support yet
 
 
 ## Rest
-
+We can allow unlimited params to function by using the rest operator. 
 ```javascript
 function demo(part1, ...part2) {
-	return ({part1, part2})
+	return {part1, part2}
 }
 
 console.log(demo(1,2,3,4,5,6))
@@ -233,8 +233,7 @@ console.log(globalVar)
 console.log(globalLet)
 
 ```
-
-However, it does not assigne anything to `window`
+However, it does not assign anything to `window`
 
 ```javascript
 let me = "go";  // globally scoped
@@ -266,6 +265,15 @@ console.log(me)
 const a = "b"
 a = "a"
 ```
+It should be noted that `const` objects can still be mutated.
+
+```javascript
+const a = { a: "a" }
+a.a = "b"
+console.log(a)
+```
+
+
 
 ## For..of
 New type of iterators with an alternative to the `for..in`. It returns the value instead of the `keys`.
@@ -294,7 +302,6 @@ for (let i of list) {
 
 ### Iterators
 The iterator is a more dynamic type than arrays. 
-
 
 ```javascript 
 let infinite = {
@@ -443,12 +450,12 @@ export { import1 as name1, import2 as name2, …, nameN } from …;
 ```
 
 [Import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
-
 [Export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
 
 
 ## Set
 Sets as in the mathematical counterpart where all items are unique. 
+For people who know `SQL` this is equivalent to `distinct`. 
 
 ```javascript
 var set = new Set();
@@ -461,11 +468,11 @@ for(var item of set) {
 }
 ```
 
-
 [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
 
 ## WeakSet
-The `WeakSet` object lets you store weakly held objects in a collection. Objects without an reference will be garbage collected. 
+The `WeakSet` object lets you store weakly held objects in a collection. 
+Objects without an reference will be garbage collected. 
 
 ```javascript
 var item = { a:"Potato"}
@@ -485,7 +492,7 @@ for(let item of set) {
 
 
 ## Map
-Maps, also known as dictonary. 
+Maps, also known as dictonaries. 
 
 
 ```javascript
@@ -505,6 +512,23 @@ for(let item in map) {
    console.log(item)
 }
 ```
+
+Other types than strings can be used. 
+
+```javascript
+var map = new Map();
+var key = {a: "a"}
+map.set(key, 12);
+
+
+console.log(map.get(key))
+console.log(map.get({a: "a"}))
+
+
+```
+
+
+
 
 [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
 
