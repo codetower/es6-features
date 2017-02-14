@@ -17,7 +17,7 @@ function clearResult(id) {
 var convert = i => code => {
   console.log(code)
   return code
-    .replace(/<(?:.|\n)*?>/gm, '')
+    .replace(/<(?:\w|\/)(?:.|\n)*?>/gm, '')
     .replace(/console/, `clearResult("${i}"); \nconsole`)
     .replace(/console.log\((.*)\).*/g, `
 try { 
