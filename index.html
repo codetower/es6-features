@@ -393,7 +393,7 @@ set.add(&quot;Potato&quot;).add(&quot;Tomato&quot;).add(&quot;Tomato&quot;);
 console.log(set.size)
 console.log(set.has(&quot;Tomato&quot;))
 
-for(item of set) {
+for(var item of set) {
    console.log(item)
 }
 </code></pre>
@@ -407,7 +407,7 @@ console.log(set.size)
 console.log(set.has({a:&quot;Tomato&quot;}))
 console.log(set.has(item))
 
-for(item of set) {
+for(let item of set) {
    console.log(item)
 }
 </code></pre>
@@ -421,12 +421,12 @@ map.set(&quot;Tomato&quot;, 34);
 console.log(map.get(&quot;Potato&quot;))
 
 
-for(item of map) {
+for(let item of map) {
    console.log(item)
 }
 
 
-for(item in map) {
+for(let item in map) {
    console.log(item)
 }
 </code></pre>
@@ -452,12 +452,12 @@ delete o2;
 
 console.log(wm.get(o3));
 
-for(item in wm) {
+for(let item in wm) {
    console.log(item)
 }
 
 
-for(item of wm) {
+for(let item of wm) {
    console.log(item)
 }
 </code></pre>
@@ -643,10 +643,9 @@ console.log(Reflect.has(y, &quot;x&quot;));
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect">More Info</a></p>
 <h2 id="tail-call-optimization">Tail Call Optimization</h2>
 <p>ES6 should fix ensure tail calls does not generate stack overflow. (Not all implementations work).</p>
-<!-- Sorry for yoda it's a temp workaround due to the framework not working properly (it was a slash together) -->
 <pre><code class="lang-javascript">
 function factorial(n, acc = 1) {
-    if (1 &gt;= n) return acc; 
+    if (n &lt;= 1) return acc; 
     return factorial(n - 1, n * acc);
 }
 console.log(factorial(10))
