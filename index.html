@@ -643,9 +643,10 @@ console.log(Reflect.has(y, &quot;x&quot;));
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect">More Info</a></p>
 <h2 id="tail-call-optimization">Tail Call Optimization</h2>
 <p>ES6 should fix ensure tail calls does not generate stack overflow. (Not all implementations work).</p>
-<pre><code class="lang-javascript">function factorial(n, acc = 1) {
-
-    if (n &lt;= 1) return acc;
+<!-- Sorry for yoda it's a temp workaround due to the framework not working properly (it was a slash together) -->
+<pre><code class="lang-javascript">
+function factorial(n, acc = 1) {
+    if (1 &gt;= n) return acc; 
     return factorial(n - 1, n * acc);
 }
 console.log(factorial(10))
