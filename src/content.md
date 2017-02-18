@@ -492,7 +492,7 @@ for(let item of set) {
 
 
 ## Map
-Maps, also known as dictonaries. 
+Maps, also known as dictionaries.
 
 
 ```javascript
