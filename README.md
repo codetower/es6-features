@@ -1,5 +1,6 @@
 # es6-features
 Quck rundown of new ES6 features with evaluatable code blocks. 
+Working demo can be found [here](https://codetower.github.io/es6-features/).
 
 ## The code
 There are currently not much in terms of build process. Minifying and dependency management is not used.
