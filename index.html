@@ -172,14 +172,14 @@ console.log(c);
 console.log(f(3))
 </code></pre>
 <h2 id="spread">Spread</h2>
-<p>In functions</p>
+<p>In functions:</p>
 <pre><code class="lang-javascript">function f(x, y, z) {
   return x + y + z;
 }
 // Pass each elem of array as argument
 console.log(f(...[1,2,3]))
 </code></pre>
-<p>In arrays</p>
+<p>In arrays:</p>
 <pre><code class="lang-javascript">var parts = [&quot;shoulders&quot;, &quot;knees&quot;];
 var lyrics = [&quot;head&quot;, ...parts, &quot;and&quot;, &quot;toes&quot;]; 
 
@@ -198,7 +198,7 @@ let n = { x, y, ...z };
 console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
 console.log(obj)
 </code></pre>
-<p>Sadly it is not support yet</p>
+<p>Sadly it is not supported yet:</p>
 <p><code>npm install --save-dev babel-plugin-transform-object-rest-spread</code></p>
 <h2 id="rest">Rest</h2>
 <p>We can allow unlimited params to function by using the rest operator. </p>
@@ -221,14 +221,14 @@ console.log(demo(1,2,3,4,5,6))
 console.log(globalVar)
 console.log(globalLet)
 </code></pre>
-<p>However, it does not assign anything to <code>window</code></p>
+<p>However, it does not assign anything to <code>window</code>:</p>
 <pre><code class="lang-javascript">let me = &quot;go&quot;;  // globally scoped
 var i = &quot;able&quot;; // globally scoped
 
 console.log(window.me); 
 console.log(window.i);
 </code></pre>
-<p>It is not possible to redeclare a variable using <code>let</code></p>
+<p>It is not possible to redeclare a variable using <code>let</code>:</p>
 <pre><code class="lang-javascript">
 let me = &quot;foo&quot;;
 let me = &quot;bar&quot;; 
@@ -240,7 +240,7 @@ var me = &quot;bar&quot;;
 console.log(me)
 </code></pre>
 <h2 id="const">Const</h2>
-<p><code>Const</code> is for read only variables</p>
+<p><code>Const</code> is for read-only variables.</p>
 <pre><code class="lang-javascript">const a = &quot;b&quot;
 a = &quot;a&quot;
 </code></pre>
@@ -250,7 +250,7 @@ a.a = &quot;b&quot;
 console.log(a)
 </code></pre>
 <h2 id="for-of">For..of</h2>
-<p>New type of iterators with an alternative to the <code>for..in</code>. It returns the value instead of the <code>keys</code>.</p>
+<p>New type of iterator, an alternative to <code>for..in</code>. It returns the values instead of the <code>keys</code>.</p>
 <pre><code class="lang-javascript">let list = [4, 5, 6];
 
 console.log(list)
@@ -269,7 +269,7 @@ for (let i of list) {
 }
 </code></pre>
 <h3 id="iterators">Iterators</h3>
-<p>The iterator is a more dynamic type than arrays. </p>
+<p>The iterator is a more dynamic type than an array. </p>
 <pre><code class="lang-javascript">let infinite = {
   [Symbol.iterator]() {
     let c = 0;
@@ -291,7 +291,7 @@ for (var n of infinite) {
   console.log(n);
 }
 </code></pre>
-<p>Using Typescript interfaces we can see how it looks</p>
+<p>Using Typescript interfaces we can see how it looks:</p>
 <pre><code class="lang-javascript">no-eval
 interface IteratorResult {
   done: boolean;
@@ -305,7 +305,7 @@ interface Iterable {
 }
 </code></pre>
 <h3 id="generators">Generators</h3>
-<p>Generators create iterators, and are more dynamic than iterators. They do not have to keep track of state in the same manner and does not support the concept of done. </p>
+<p>Generators create iterators, and are more dynamic than iterators. They do not have to keep track of state in the same manner and do not support the concept of <code>done</code>. </p>
 <pre><code class="lang-javascript">var infinity = {
   [Symbol.iterator]: function*() {
     var c = 1;
@@ -407,7 +407,7 @@ for(var item of set) {
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">Set</a></p>
 <h2 id="weakset">WeakSet</h2>
 <p>The <code>WeakSet</code> object lets you store weakly held objects in a collection. 
-Objects without an reference will be garbage collected. </p>
+Objects without a reference will be garbage collected. </p>
 <pre><code class="lang-javascript">var item = { a:&quot;Potato&quot;}
 var set = new WeakSet();
 set.add({ a:&quot;Potato&quot;}).add(item).add({ a:&quot;Tomato&quot;}).add({ a:&quot;Tomato&quot;});
@@ -421,7 +421,7 @@ for(let item of set) {
 </code></pre>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet">WeakSet</a></p>
 <h2 id="map">Map</h2>
-<p>Maps, also known as dictonaries. </p>
+<p>Maps, also known as dictionaries.</p>
 <pre><code class="lang-javascript">var map = new Map();
 map.set(&quot;Potato&quot;, 12);
 map.set(&quot;Tomato&quot;, 34);
@@ -480,7 +480,7 @@ for(let item of wm) {
 </code></pre>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap">WeakMap</a></p>
 <h2 id="proxies">Proxies</h2>
-<p>Proxies can be used to alter objects behavoir. It allows us to define traps.</p>
+<p>Proxies can be used to alter objects&#39; behaviour. They allow us to define traps.</p>
 <pre><code class="lang-javascript">
 var obj = function ProfanityGenerator() {
     return {
@@ -501,7 +501,7 @@ var proxy = new Proxy(obj, handler);
 
 console.log(proxy.words);
 </code></pre>
-<p>The following traps are available</p>
+<p>The following traps are available:</p>
 <pre><code class="lang-javascript">no-eval
 var handler =
 {
@@ -523,7 +523,7 @@ var handler =
 </code></pre>
 <p><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Proxy">Proxies</a></p>
 <h2 id="symbols">Symbols</h2>
-<p>Symbols are a new type. Can be used to create anomymous properties.</p>
+<p>Symbols are a new type. Can be used to create anonymous properties.</p>
 <pre><code class="lang-javascript">var typeSymbol = Symbol(&quot;type&quot;);
 
 class Pet {
@@ -622,7 +622,7 @@ Promise.race([p1, p2]).then((res) =&gt; {
 })
 </code></pre>
 <h3 id="fail-fast">Fail fast</h3>
-<p>If a promise fails <code>all</code> and <code>race</code> will reject as well. </p>
+<p>If a promise fails, <code>all</code> and <code>race</code> will reject as well. </p>
 <pre><code class="lang-javascript">var p1 = new Promise((resolve, reject) =&gt; {
   setTimeout(() =&gt; resolve(&quot;1&quot;), 1001)
 })
@@ -644,7 +644,7 @@ Promise.all([p1, p2]).then((res) =&gt; {
 </code></pre>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">More Info</a></p>
 <h2 id="reflect">Reflect</h2>
-<p>New type of meta programming with new API for existing and also few new methods. </p>
+<p>New type of meta programming with new API for existing and also a few new methods. </p>
 <pre><code class="lang-javascript">
 var z = {w: &quot;Super Hello&quot;}
 var y = {x: &quot;hello&quot;, __proto__: z};
@@ -659,7 +659,7 @@ console.log(Reflect.has(y, &quot;x&quot;));
 </code></pre>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect">More Info</a></p>
 <h2 id="tail-call-optimization">Tail Call Optimization</h2>
-<p>ES6 should fix ensure tail calls does not generate stack overflow. (Not all implementations work).</p>
+<p>ES6 should fix ensure tail calls do not generate stack overflow. (Not all implementations work).</p>
 <pre><code class="lang-javascript">
 function factorial(n, acc = 1) {
     if (n &lt;= 1) return acc; 
