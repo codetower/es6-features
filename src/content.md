@@ -165,7 +165,7 @@ console.log(f(3))
 
 ## Spread 
 
-In functions
+In functions:
 
 ```javascript
 function f(x, y, z) {
@@ -175,7 +175,7 @@ function f(x, y, z) {
 console.log(f(...[1,2,3]))
 ```
 
-In arrays
+In arrays:
 
 ```javascript
 var parts = ["shoulders", "knees"];
@@ -201,7 +201,7 @@ console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
 console.log(obj)
 ```
 
-Sadly it is not support yet
+Sadly it is not supported yet:
 
 `npm install --save-dev babel-plugin-transform-object-rest-spread`
 
@@ -233,7 +233,7 @@ console.log(globalVar)
 console.log(globalLet)
 
 ```
-However, it does not assign anything to `window`
+However, it does not assign anything to `window`:
 
 ```javascript
 let me = "go";  // globally scoped
@@ -242,7 +242,7 @@ var i = "able"; // globally scoped
 console.log(window.me); 
 console.log(window.i); 
 ```
-It is not possible to redeclare a variable using `let`
+It is not possible to redeclare a variable using `let`:
 
 ```javascript
 
@@ -259,7 +259,7 @@ console.log(me)
 ```
 
 ## Const
-`Const` is for read only variables
+`Const` is for read-only variables.
 
 ```javascript
 const a = "b"
@@ -276,7 +276,7 @@ console.log(a)
 
 
 ## For..of
-New type of iterators with an alternative to the `for..in`. It returns the value instead of the `keys`.
+New type of iterator, an alternative to `for..in`. It returns the values instead of the `keys`.
 
 ```javascript
 let list = [4, 5, 6];
@@ -301,7 +301,7 @@ for (let i of list) {
 
 
 ### Iterators
-The iterator is a more dynamic type than arrays. 
+The iterator is a more dynamic type than an array. 
 
 ```javascript 
 let infinite = {
@@ -326,7 +326,7 @@ for (var n of infinite) {
 }
 ```
 
-Using Typescript interfaces we can see how it looks
+Using Typescript interfaces we can see how it looks:
 
 ```javascript 
 no-eval
@@ -343,7 +343,7 @@ interface Iterable {
 ```
 
 ### Generators
-Generators create iterators, and are more dynamic than iterators. They do not have to keep track of state in the same manner and does not support the concept of done. 
+Generators create iterators, and are more dynamic than iterators. They do not have to keep track of state in the same manner and do not support the concept of `done`. 
 
 ```javascript 
 var infinity = {
@@ -472,7 +472,7 @@ for(var item of set) {
 
 ## WeakSet
 The `WeakSet` object lets you store weakly held objects in a collection. 
-Objects without an reference will be garbage collected. 
+Objects without a reference will be garbage collected. 
 
 ```javascript
 var item = { a:"Potato"}
@@ -570,7 +570,7 @@ for(let item of wm) {
 [WeakMap](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap)
 
 ## Proxies
-Proxies can be used to alter objects behavoir. It allows us to define traps.
+Proxies can be used to alter objects' behaviour. They allow us to define traps.
 
 ```javascript
 
@@ -595,7 +595,7 @@ console.log(proxy.words);
 
 ```
 
-The following traps are available
+The following traps are available:
 
 ```javascript 
 no-eval
@@ -623,7 +623,7 @@ var handler =
 
 
 ## Symbols
-Symbols are a new type. Can be used to create anomymous properties.
+Symbols are a new type. Can be used to create anonymous properties.
 
 ```javascript 
 var typeSymbol = Symbol("type");
@@ -751,7 +751,7 @@ Promise.race([p1, p2]).then((res) => {
 ```
 
 ### Fail fast
-If a promise fails `all` and `race` will reject as well. 
+If a promise fails, `all` and `race` will reject as well. 
 
 ```javascript
 var p1 = new Promise((resolve, reject) => {
@@ -780,7 +780,7 @@ Promise.all([p1, p2]).then((res) => {
 
 
 ## Reflect 
-New type of meta programming with new API for existing and also few new methods. 
+New type of meta programming with new API for existing and also a few new methods. 
 
 ```javascript
 
@@ -800,7 +800,7 @@ console.log(Reflect.has(y, "x"));
 [More Info](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect)
 
 ## Tail Call Optimization 
-ES6 should fix ensure tail calls does not generate stack overflow. (Not all implementations work).
+ES6 should fix ensure tail calls do not generate stack overflow. (Not all implementations work).
 
 
 ```javascript
