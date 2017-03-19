@@ -14,7 +14,7 @@
 
 
 <h2 id="arrow-functions">Arrow Functions</h2>
-<p>A short hand notation for <code>function()</code>, but it does not bind <code>this</code>.</p>
+<p>A short hand notation for <code>function()</code>, but it does not bind <code>this</code> in the same way.</p>
 <pre><code class="lang-javascript">no-eval
 var odds = evens.map(v =&gt; v + 1);  // no parentes and no brackets
 var nums = evens.map((v, i) =&gt; v + i);
@@ -41,6 +41,28 @@ console.log(object.arrowGetThis());
 console.log(this)
 console.log(object.regularGetName());
 console.log(object.regularGetThis());
+</code></pre>
+<p>They work well with classes </p>
+<pre><code class="lang-javascript">class someClass {
+    constructor() {
+        this.name = &quot;Name&quot;
+    }
+
+    testRegular() {
+        return function() { return this }
+
+    }
+
+    testArrow() {
+        return () =&gt; this.name;
+    }
+}
+
+var obj = new someClass();
+
+console.log(obj.name)
+console.log(obj.testRegular()());
+console.log(obj.testArrow()());
 </code></pre>
 
 <h2 id="classes">Classes</h2>

@@ -1,7 +1,8 @@
 
 ## Arrow Functions
 
-A short hand notation for `function()`, but it does not bind `this`.
+A short hand notation for `function()`, but it does not bind `this` in the same way.
+Instead of `this` being binded to the function, it is binding to the contextual `this`.
 
 ```javascript
 no-eval
@@ -34,4 +35,29 @@ console.log(object.arrowGetThis());
 console.log(this)
 console.log(object.regularGetName());
 console.log(object.regularGetThis());
+```
+
+They work well with classes 
+
+```javascript 
+class someClass {
+    constructor() {
+        this.name = "Name"
+    }
+
+    testRegular() {
+        return function() { return this }
+
+    }
+
+    testArrow() {
+        return () => this.name;
+    }
+}
+
+var obj = new someClass();
+
+console.log(obj.name)
+console.log(obj.testRegular()());
+console.log(obj.testArrow()());
 ```
